@@ -16,7 +16,7 @@ class HttpRequestTest {
         assertThat(id).isEqualTo(1L);
     }
 
-    @DisplayName("getLongFromPathParameter(idx): HttpRequest의 path에서 지정한 위치에(idx) 값이 없을 경우 예외가 발생한다.")
+    @DisplayName("getLongFromPathParameter(idx): HttpRequest의 path에서 지정한 위치에(idx) 값이 없을 경우 예외를 던진다.")
     @Test
     void getLongFromPathParameter_fail_noValue() {
         HttpRequest request = new HttpRequest(HttpMethod.GET, "/tasks/", "");
@@ -27,7 +27,7 @@ class HttpRequestTest {
         );
     }
 
-    @DisplayName("getLongFromPathParameter(idx): HttpRequest의 path에서 지정한 위치(idx)가 없는 경우 예외가 발생한다.")
+    @DisplayName("getLongFromPathParameter(idx): HttpRequest의 path에서 지정한 위치(idx)가 없는 경우 예외를 던진다.")
     @Test
     void getLongFromPathParameter_fail_noPlace() {
         HttpRequest request = new HttpRequest(HttpMethod.GET, "/tasks", "");
@@ -38,7 +38,7 @@ class HttpRequestTest {
         );
     }
 
-    @DisplayName("getLongFromPathParameter(idx): HttpRequest의 path에서 지정한 위치(idx)의 값을 Long으로 파싱할 수 없는 경우 예외가 발생한다.")
+    @DisplayName("getLongFromPathParameter(idx): HttpRequest의 path에서 지정한 위치(idx)의 값을 Long으로 파싱할 수 없는 경우 예외를 던진다.")
     @Test
     void getLongFromPathParameter_fail_canNotParseLong() {
         HttpRequest request = new HttpRequest(HttpMethod.GET, "/tasks/aa", "");
