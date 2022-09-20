@@ -20,11 +20,9 @@ public class TaskService {
      * @throws TaskNotFoundException 조회할 Task가 존재하지 않는 경우이다.
      */
     public String getTask(Long id) throws IOException {
-        if (taskRepository.isExist(id)) {
-            Task task = taskRepository.findById(id);
-            return JsonParser.objectToJson(task);
-        }
-        throw new TaskNotFoundException();
+        Task task = taskRepository.findById(id)
+                .orElseThrow(TaskNotFoundException::new);
+        return JsonParser.objectToJson(task);
     }
 
     public String createTask(String body) throws IOException {

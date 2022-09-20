@@ -1,9 +1,12 @@
 package com.codesoom.assignment;
 
+import com.codesoom.exception.TaskNotFoundException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class TaskRepository {
     private final static Map<Long, Task> tasks = new HashMap<>();
@@ -20,7 +23,12 @@ public class TaskRepository {
     }
 
     public Task update(Task task) {
-        Task findOne = findById(task.getId());
+        if (task == null) {
+            throw new IllegalArgumentException("task가 null입니다.");
+        }
+
+        Task findOne = findById(task.getId())
+                .orElseThrow(TaskNotFoundException::new);
         findOne.setTitle(task.getTitle());
         return findOne;
     }
@@ -29,11 +37,17 @@ public class TaskRepository {
         tasks.remove(id);
     }
 
-    public Task findById(Long id) {
-        return tasks.get(id);
+    public Optional<Task> findById(Long id) {
+        if (isExist(id)) {
+            return Optional.ofNullable(tasks.get(id));
+        }
+        return Optional.empty();
     }
 
     public boolean isExist(Long id) {
-        return findById(id) != null;
+        if (id == null) {
+            return false;
+        }
+        return tasks.containsKey(id);
     }
 }
