@@ -33,7 +33,7 @@ public class TaskHandler implements HttpHandler {
     private void handleRequest(HttpExchange exchange) throws IOException {
         HttpResponse httpResponse = new HttpResponse(exchange);
 
-        if (!HttpRequest.isValidRequest(exchange)) {
+        if (!HttpRequest.isValid(exchange)) {
             httpResponse.response(BAD_REQUEST, "유효하지 않은 Http 요청입니다.");
             return;
         }

@@ -28,7 +28,7 @@ public class HttpRequest {
                 .collect(Collectors.joining("\n"));
     }
 
-    public static boolean isValidRequest(HttpExchange exchange) {
+    public static boolean isValid(HttpExchange exchange) {
         try {
             HttpMethod.of(exchange.getRequestMethod());
             return true;
